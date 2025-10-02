@@ -1,48 +1,21 @@
-import { Section } from "@/components/section"
-import { ContactForm } from "@/components/contact-form"
-
-export const metadata = {
-  title: "Contact Us | Portara",
-  description: "Get in touch with Portara for sponsorship, bulk orders, press inquiries, or general questions.",
-}
+import ContactForm from "@/components/contact-form";
+import styles from "./contact.module.css";
 
 export default function ContactPage() {
   return (
-    <>
-      {/* Hero */}
-      <Section className="pt-12 md:pt-20">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 text-balance">Get in touch</h1>
-          <p className="text-xl text-muted-foreground text-balance">
-            Have questions about sponsoring, bulk orders, or partnerships? We'd love to hear from you.
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <h1 className={styles.title}>Contact Portara</h1>
+          <p className={styles.subtitle}>
+            Questions, feedback, or partnership ideas? Drop us a message and we’ll get back to you.
           </p>
-        </div>
-      </Section>
+        </header>
 
-      {/* Contact Form */}
-      <Section className="bg-card">
-        <div className="max-w-3xl mx-auto">
+        <div className={styles.panel}>
           <ContactForm />
         </div>
-      </Section>
-
-      {/* Contact Info */}
-      <Section>
-        <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-semibold mb-2">Email</h3>
-              <a href="mailto:info@portara.org" className="text-muted-foreground hover:text-primary transition-colors">
-                info@portara.org
-              </a>
-            </div>
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-semibold mb-2">Response Time</h3>
-              <p className="text-muted-foreground">We typically respond within 24-48 hours</p>
-            </div>
-          </div>
-        </div>
-      </Section>
-    </>
-  )
+      </div>
+    </section>
+  );
 }

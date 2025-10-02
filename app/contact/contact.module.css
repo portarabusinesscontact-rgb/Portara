@@ -1,0 +1,67 @@
+/* Page layout is theme-aware and scoped (no homepage collisions) */
+.section {
+  /* inherits your page bg; adds a subtle, on-brand glow derived from text color */
+  padding: clamp(24px, 4vw, 48px) 0;
+  background:
+    radial-gradient(1000px 400px at 100% -10%, color-mix(in oklab, currentColor 6%, transparent), transparent 60%) no-repeat,
+    radial-gradient(1200px 500px at 0% 110%, color-mix(in oklab, currentColor 5%, transparent), transparent 60%) no-repeat;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.header {
+  text-align: center;
+  display: grid;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: inherit; /* match page text color */
+}
+
+.subtitle {
+  margin: 0 auto;
+  max-width: 720px;
+  color: color-mix(in oklab, currentColor 65%, transparent);
+  font-size: clamp(14px, 1.4vw, 16px);
+}
+
+/* Panel that holds the existing ContactForm component */
+.panel {
+  width: min(760px, 96vw);
+  margin: 0 auto;
+  padding: clamp(18px, 2.6vw, 28px);
+  border-radius: 18px;
+  background: color-mix(in oklab, currentColor 6%, transparent);
+  border: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 50px color-mix(in oklab, currentColor 10%, transparent);
+
+  /* keep contents inside rounded border */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+/* Constrain any form inside the panel even if it has no class */
+.panel :global(form) {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Ensure all descendants size within the box (avoids subtle overflow) */
+.panel :global(*) ,
+.panel :global(*::before),
+.panel :global(*::after) {
+  box-sizing: border-box;
+}
+
+

@@ -1,120 +1,100 @@
-"use client"
+"use client";
+import { useState } from "react";
+import styles from "./contact-form.module.css";
 
-import type React from "react"
+const reasons = [
+  "General question",
+  "Sponsorship",
+  "Bulk order",
+  "Partnership",
+  "Support",
+];
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
+export default function ContactForm() {
+  const [state, setState] = useState<{ loading: boolean; msg: string | null; ok?: boolean }>({
+    loading: false,
+    msg: null,
+  });
 
-export function ContactForm() {
-  const { toast } = useToast()
-  const [loading, setLoading] = useState(false)
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const payload = {
+      name: (f.elements.namedItem("name") as HTMLInputElement).value,
+      email: (f.elements.namedItem("email") as HTMLInputElement).value,
+      reason: (f.elements.namedItem("reason") as HTMLSelectElement).value,
+      message: (f.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setLoading(true)
-
-    const formData = new FormData(e.currentTarget)
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      reason: formData.get("reason"),
-      message: formData.get("message"),
-    }
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-
-      if (response.ok) {
-        toast({
-          title: "Message sent!",
-          description: "We'll get back to you as soon as possible.",
-        })
-        e.currentTarget.reset()
-      } else {
-        throw new Error("Failed to submit")
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
-      setLoading(false)
-    }
+    setState({ loading: true, msg: null });
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const json = await res.json();
+    setState({
+      loading: false,
+      msg: json.ok ? "Message sent ✅" : json.error || "Failed to send ❌",
+      ok: !!json.ok,
+    });
+    if (json.ok) f.reset();
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-2">
-            Name *
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-          />
-        </div>
+    <form onSubmit={onSubmit} className={styles.form} aria-label="Contact form">
+      <header className={styles.head}>
+        <h2 className={styles.title}>Get in touch</h2>
+        <p className={styles.subtitle}>
+          Have questions about sponsoring, bulk orders, or partnerships? We’d love to hear from you.
+        </p>
+      </header>
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-2">
-            Email *
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-          />
-        </div>
+      <div className={styles.grid}>
+        <label className={styles.field}>
+          <span>Name *</span>
+          <input name="name" placeholder="Your name" required className={styles.input} />
+        </label>
+
+        <label className={styles.field}>
+          <span>Email *</span>
+          <input name="email" type="email" placeholder="you@example.com" required className={styles.input} />
+        </label>
       </div>
 
-      <div>
-        <label htmlFor="reason" className="block text-sm font-medium mb-2">
-          Reason for Contact *
-        </label>
-        <select
-          id="reason"
-          name="reason"
-          required
-          className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          <option value="">Select a reason</option>
-          <option value="sponsorship">Sponsorship</option>
-          <option value="bulk">Bulk Purchase</option>
-          <option value="press">Press Inquiry</option>
-          <option value="partnership">Partnership</option>
-          <option value="other">Other</option>
+      <label className={styles.field}>
+        <span>Reason for Contact *</span>
+        <select name="reason" required className={styles.select} defaultValue="">
+          <option value="" disabled>
+            Select a reason
+          </option>
+          {reasons.map((r) => (
+            <option key={r} value={r}>
+              {r}
+            </option>
+          ))}
         </select>
-      </div>
+      </label>
 
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-2">
-          Message *
-        </label>
+      <label className={styles.field}>
+        <span>Message *</span>
         <textarea
-          id="message"
           name="message"
+          placeholder="Tell us how we can help…"
           required
-          rows={6}
-          className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-          placeholder="Tell us how we can help..."
+          className={styles.textarea}
         />
-      </div>
+      </label>
 
-      <Button type="submit" size="lg" disabled={loading} className="w-full md:w-auto">
-        {loading ? "Sending..." : "Send Message"}
-      </Button>
+      <button className={styles.button} disabled={state.loading}>
+        {state.loading ? "Sending…" : "Send Message"}
+      </button>
+
+      {state.msg && (
+        <p className={styles.status} role="status" aria-live="polite">
+          {state.msg}
+        </p>
+      )}
     </form>
-  )
+  );
 }

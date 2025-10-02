@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+:root { --brand: #222; } /* change to your brand color */
 
 :root {
   --background: oklch(1 0 0);
@@ -37,6 +38,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+.solid {
+  background: var(--brand);
+  color: #fff;
+  border-color: color-mix(in oklab, var(--brand) 85%, black 15%);
+  box-shadow: 0 10px 18px color-mix(in oklab, var(--brand) 35%, transparent);
 }
 
 .dark {
