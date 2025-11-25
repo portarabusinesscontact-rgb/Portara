@@ -9,10 +9,12 @@ import { useToast } from "@/hooks/use-toast"
 export function ContactForm() {
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
+    setStatus("idle")
 
     const formData = new FormData(e.currentTarget)
     const data = {
@@ -30,18 +32,40 @@ export function ContactForm() {
       })
 
       if (response.ok) {
+        // ✅ SUCCESS PATH
+        setStatus("success")
         toast({
           title: "Message sent!",
           description: "We'll get back to you as soon as possible.",
         })
         e.currentTarget.reset()
       } else {
-        throw new Error("Failed to submit")
+        // ❌ ERROR PATH (API returned 4xx/5xx)
+        let errorMessage = "Failed to submit"
+        try {
+          const json = await response.json()
+          if (json?.error) errorMessage = json.error
+        } catch {
+          // ignore parse error
+        }
+        console.error("Contact form submit error:", errorMessage)
+
+        setStatus("error")
+        toast({
+          title: "We couldn’t send your message",
+          description:
+            "Something went wrong with the contact form. Please try again, or email us directly at portarabusinesscontact@gmail.com.",
+          variant: "destructive",
+        })
       }
     } catch (error) {
+      // ❌ NETWORK / UNEXPECTED ERROR
+      console.error(error)
+      setStatus("error")
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "We couldn’t send your message",
+        description:
+          "Something went wrong with the contact form. Please try again, or email us directly at portarabusinesscontact@gmail.com.",
         variant: "destructive",
       })
     } finally {
@@ -112,9 +136,16 @@ export function ContactForm() {
         />
       </div>
 
-      <Button type="submit" size="lg" disabled={loading} className="w-full md:w-auto">
-        {loading ? "Sending..." : "Send Message"}
-      </Button>
+      <div className="space-y-2">
+        <Button
+          type="submit"
+          size="lg"
+          disabled={loading}
+          className="w-full md:w-auto"
+        >
+          {loading ? "Sending..." : "Send Message"}
+        </Button>
+      </div>
     </form>
   )
 }
