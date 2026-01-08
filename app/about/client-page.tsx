@@ -32,8 +32,8 @@ export default function AboutClientPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
             <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden group animate-in fade-in slide-in-from-left-8 duration-700 shadow-xl">
               <img
-                src="/nonprofit-team-working-together-compassion.jpg"
-                alt="Our team"
+                src="/ChatGPT%20Image%20Jan%208,%202026,%2002_56_15%20PM.png"
+                alt="ChatGPT generated image"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </div>

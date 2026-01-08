@@ -1,8 +1,6 @@
 // app/api/contact/route.ts
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: Request): Promise<Response> {
   try {
     const body = await req.json()
@@ -22,7 +20,8 @@ export async function POST(req: Request): Promise<Response> {
       )
     }
 
-    if (!process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
       console.error("RESEND_API_KEY is missing")
       return new Response(
         JSON.stringify({ error: "Server misconfigured (no RESEND_API_KEY)" }),
@@ -33,6 +32,7 @@ export async function POST(req: Request): Promise<Response> {
       )
     }
 
+    const resend = new Resend(apiKey)
     const toAddress = process.env.CONTACT_TO
     if (!toAddress) {
       console.error("CONTACT_TO env var is missing")
