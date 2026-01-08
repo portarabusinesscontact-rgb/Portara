@@ -40,11 +40,13 @@ export default function AboutClientPage() {
             <div className="space-y-6 animate-in fade-in slide-in-from-right-8 duration-700">
               <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight">How we started</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Portara was founded in 2020 by a group of designers, engineers, and social workers who saw firsthand the
-                lack of dignified shelter options for people experiencing homelessness.
+                Portara is a student-founded 501(c)(3) built around one simple observation: in New York City, many
+                people sleeping outside refuse congregate shelters because of safety, rules, crowding, or separation
+                from partners/pets—but blankets and sleeping bags still leave people exposed to rain, wind, and
+                freezing concrete.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                We believed that everyone deserves privacy, protection, and a sense of personal space— regardless of
+                We believed that everyone deserves privacy, protection, and a sense of personal space- regardless of
                 their housing situation. That belief drove us to create the Portara shelter: a portable, durable, and
                 dignified solution.
               </p>
@@ -80,15 +82,26 @@ export default function AboutClientPage() {
 
           <div className="space-y-8">
             {[
-              { year: "2020", title: "Founded", description: "Portara established as a 501(c)(3) nonprofit" },
               {
-                year: "2021",
-                title: "First Distribution",
-                description: "Distributed 100 shelters in partnership with 5 organizations",
+                year: "Sept 2025",
+                title: "Founded",
+                description: "Formed the Portara team to design a dignified, portable shelter.",
               },
-              { year: "2022", title: "Expansion", description: "Grew to 50+ partner organizations across 20 cities" },
-              { year: "2023", title: "Milestone", description: "Reached 1,000 shelters distributed" },
-              { year: "2024", title: "Today", description: "2,500+ shelters distributed, 150+ partners, 45 cities" },
+              {
+                year: "Oct 2025",
+                title: "501(c)(3) Status",
+                description: "Received official 501(c)(3) determination so we can fund and scale impact.",
+              },
+              {
+                year: "Nov 2025",
+                title: "Pilot & Distribution",
+                description: "Tested and delivered our first set of shelters with a partner agency.",
+              },
+              {
+                year: "Today",
+                title: "Building Momentum",
+                description: "Designing a new compact tent and expanding partnerships for wider reach.",
+              },
             ].map((item, index) => (
               <div
                 key={item.year}

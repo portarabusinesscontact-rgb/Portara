@@ -35,7 +35,7 @@ export function Footer() {
             <p className="text-xs text-muted-foreground">
               Portara is a registered 501(c)(3) nonprofit organization.
               <br />
-              EIN: XX-XXXXXXX
+              EIN: 41-3434523
             </p>
           </div>
 

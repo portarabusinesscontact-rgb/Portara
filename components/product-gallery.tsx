@@ -6,14 +6,14 @@ import { useState } from "react"
 
 const images = [
   {
-    src: "/backpack-form-portable-shelter-tent-folded.jpg",
-    alt: "Portara shelter in compact backpack form",
-    caption: "Backpack form - Portable and easy to carry",
+    src: "/tent-front.png",
+    alt: "Portara tent closed, front view on its raised frame",
+    caption: "Front view - Raised frame with enclosed tent",
   },
   {
-    src: "/expanded-tent-shelter-privacy-dignity.jpg",
-    alt: "Portara shelter fully expanded",
-    caption: "Expanded form - Private, protected space",
+    src: "/tent-open.png",
+    alt: "Portara tent open with fly raised, showing sleeping area",
+    caption: "Open setup - Ventilated fly with sleeping space",
   },
 ]
 

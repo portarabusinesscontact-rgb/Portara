@@ -6,10 +6,10 @@ import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { SPONSOR_CHECKOUT_URL } from "@/lib/config"
 
-const amounts = [25, 50, 100]
+const amounts = [50, 100, 500]
 
 export function DonationOptions() {
-  const [selectedAmount, setSelectedAmount] = useState(50)
+  const [selectedAmount, setSelectedAmount] = useState(100)
   const [customAmount, setCustomAmount] = useState("")
   const [isMonthly, setIsMonthly] = useState(false)
   const [showCustom, setShowCustom] = useState(false)
@@ -120,7 +120,7 @@ export function DonationOptions() {
             <>
               <span className="font-semibold text-primary">${finalAmount}</span> sponsors{" "}
               <span className="font-semibold">
-                {Math.floor(Number(finalAmount) / 50)} shelter{Math.floor(Number(finalAmount) / 50) !== 1 ? "s" : ""}
+                {Math.floor(Number(finalAmount) / 100)} shelter{Math.floor(Number(finalAmount) / 100) !== 1 ? "s" : ""}
               </span>
             </>
           )}
@@ -149,7 +149,7 @@ export function DonationOptions() {
       )}
 
       <p className="text-xs text-center text-muted-foreground mt-4">
-        Tax-deductible as allowed by law. EIN: XX-XXXXXXX
+        Tax-deductible as allowed by law. EIN: 41-3434523
       </p>
     </Card>
   )

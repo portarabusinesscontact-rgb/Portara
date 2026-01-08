@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -18,8 +19,16 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/40 shadow-sm transition-all duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <span className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+          <Link href="/" className="flex items-center space-x-3 group">
+            <Image
+              src="/image-Picsart-BackgroundRemover.png"
+              alt="Portara logo"
+              width={40}
+              height={40}
+              className="rounded-full shadow-md group-hover:shadow-lg transition-shadow duration-300"
+              priority
+            />
+            <span className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 tracking-tight leading-none">
               Portara
             </span>
           </Link>

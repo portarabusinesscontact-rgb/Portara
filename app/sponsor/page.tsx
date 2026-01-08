@@ -18,7 +18,7 @@ export default function SponsorPage() {
             Sponsor a shelter, change a life
           </h1>
           <p className="text-xl text-muted-foreground text-balance">
-            For just $50, you can provide a Portara shelter to someone experiencing homelessness. Give the gift of
+            For just $100, you can provide a Portara shelter to someone experiencing homelessness. Give the gift of
             privacy, protection, and dignity.
           </p>
         </div>
@@ -33,7 +33,7 @@ export default function SponsorPage() {
         <div className="max-w-3xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden">
-              <img src="/person-with-portable-shelter-dignity-hope.jpg" alt="Impact story" className="w-full h-full object-cover" />
+              <img src="/sponsor-latest.png" alt="Impact story" className="w-full h-full object-cover" />
             </div>
             <div>
               <h2 className="text-3xl font-serif font-bold mb-4">More than just shelter</h2>

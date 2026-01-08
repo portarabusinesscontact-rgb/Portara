@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -58,7 +59,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground text-lg mb-1">Expanded:</p>
-                  <p className="leading-relaxed">73 × 36 × 45 in (185 × 90 × 115 cm)</p>
+                  <p className="leading-relaxed">82.7 × 47.2 × 47.2 in (210 × 120 × 120 cm)</p>
                   <p className="leading-relaxed">1 inch elevated insulated floor</p>
                 </div>
               </div>
@@ -70,8 +71,8 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground text-lg mb-1">Packed:</p>
-                  <p className="leading-relaxed">24 × 12 × 8 in (60 × 30 × 20 cm)</p>
-                  <p className="leading-relaxed">Lightweight and portable</p>
+                  <p className="leading-relaxed">49.2 × 33.1 × 5.9 in (125 × 84 × 15 cm)</p>
+                  <p className="leading-relaxed">20kg</p>
                 </div>
               </div>
               <div className="flex items-start group">
@@ -82,7 +83,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground text-lg mb-1">Features:</p>
-                  <p className="leading-relaxed">Opaque waterproof shell, lockable flap, privacy wings, wind flap</p>
+                  <p className="leading-relaxed">Double-decker tent; steel support/frame; 210D Oxford cloth; waterproof/warm; 2-person size.</p>
                 </div>
               </div>
             </div>
@@ -156,9 +157,9 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
           {[
-            { number: "2,500+", label: "Shelters Distributed" },
-            { number: "150+", label: "Partner Organizations" },
-            { number: "45", label: "Cities Served" },
+            { number: "5", label: "Tents Deployed" },
+            { number: "2", label: "Partner Agencies" },
+            { number: "1", label: "City Served" },
           ].map((stat, index) => (
             <div key={stat.label} className="text-center group" style={{ animationDelay: `${index * 150}ms` }}>
               <div className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold bg-gradient-to-br from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -178,13 +179,19 @@ export default function HomePage() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-          {[1, 2, 3, 4].map((i) => (
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-6 items-center justify-items-center">
+          {[
+            { name: "Project Renewal", src: "/project-renewal-logo.png" },
+            { name: "Community partner", src: "/partner-latest.png" },
+          ].map((partner, index) => (
             <div
-              key={i}
-              className="aspect-[3/2] bg-muted rounded-xl flex items-center justify-center hover:bg-muted/70 transition-all duration-300 hover:scale-105 border border-border/50 shadow-sm hover:shadow-md"
+              key={partner.name}
+              className="aspect-[3/2] bg-muted rounded-xl flex items-center justify-center hover:bg-muted/70 transition-all duration-300 hover:scale-105 border border-border/50 shadow-sm hover:shadow-md p-4"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <span className="text-muted-foreground font-semibold">Partner Logo</span>
+              <div className="relative h-12 w-28 md:h-16 md:w-40">
+                <Image src={partner.src} alt={`${partner.name} logo`} fill className="object-contain" />
+              </div>
             </div>
           ))}
         </div>
